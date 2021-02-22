@@ -4,7 +4,9 @@ const input = require('readline-sync');
 
 // TODO 1.1a: Define candidateName // 
 let candidateName = '';
+
 // TODO 1.2a: Define question, correctAnswer, and candidateAnswer //
+
 let question = "";
 let correctAnswer = "";
 let candidateAnswer = "";
@@ -12,6 +14,7 @@ let questions = ["Who was the first American woman in space? ", "True or false: 
 let correctAnswers = ["Sally Ride", "True", "40", "Trajectory", "3"];
 let candidateAnswers = [];
 let numCorrect = 0;
+let numQuestions = questions.length
 
 
 function askForName() {
@@ -26,20 +29,18 @@ function askQuestion() {
     candidateAnswer = input.question(question);
     candidateAnswers[i] = candidateAnswer;
     console.log(`Your answer: ${candidateAnswer}\nCorrect answer: ${correctAnswers[i]}\n`);
+      if (candidateAnswers[i].toLowerCase() == correctAnswers[i].toLowerCase()) {
+      numCorrect += 1
+      }
   }
 }
 
 function gradeQuiz(candidateAnswers) {
 
   // TODO 1.2c: Let the candidate know if they have answered the question correctly or incorrectly // 
-  
-  for (let j = 0; j < candidateAnswers.length; j++) {
-    if (candidateAnswers[j].toLowerCase() == correctAnswers[j].toLowerCase()) {
-      numCorrect += 1
-    }
-  }
 
-  let grade = numCorrect/questions.length*100
+
+  let grade = numCorrect/numQuestions*100
   console.log(`Overall grade: ${grade}% (${numCorrect} of ${candidateAnswers.length} responses correct)`);
   if (grade >= 80) {
     console.log("Status: PASSED")
